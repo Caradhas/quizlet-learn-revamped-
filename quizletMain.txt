@@ -1,0 +1,123 @@
+
+// Online C++ Compiler - Build, Compile and Run your C++ programs online in your favorite browser
+
+#include<iostream>
+#include<cstring>
+#include<cstdlib>
+#include<ctime>
+#include<fstream>
+using namespace std;
+#include "quizlet.h"
+
+int main()
+{
+    srand(time(0));
+    arrays term;
+    arrays definition;
+    
+    ifstream i;
+    i.open("terms.txt");
+    string line;
+    while(getline(i, line)){
+        //term.grow();
+        term.add(line);
+    }
+    i.close();
+    i.open("defs.txt");
+    line;
+    while(getline(i, line)){
+       // definition.grow();
+        definition.add(line);
+    }
+    i.close();
+    
+    
+    
+    
+    
+    
+    
+    arrays wrongTerm;
+    arrays wrongDef;
+    if(term.getSize() != definition.getSize()){
+        cout << "MASSIVE ERROR!!!";
+        return 0;
+    }
+    int size = term.getSize();
+    int wrongSize = wrongDef.getSize();
+    
+    
+    while(size > 0 || wrongSize > 0){
+        string answer;
+        int chooser = rand() % size;
+        cout << definition.get(chooser)<<endl;
+        cin >> answer;
+        if(answer == term.get(chooser)){
+            cout << "girlboss!\n" << endl;
+        }
+        else{
+            cout << "idiot. the correct answer was " << term.get(chooser) << "\n" << endl;
+            wrongTerm.add(term.get(chooser));
+            wrongDef.add(definition.get(chooser));
+        }
+        term.remover(chooser);
+        definition.remover(chooser);
+        size = term.getSize();
+        wrongSize = wrongDef.getSize();
+        
+        if(size%4 == 0 && wrongSize>0){
+            for(int i = 0; i < 3 || wrongSize == 0; i++){
+                cout << wrongDef.get(i)<<endl;
+                cin >> answer;
+                if(answer == wrongTerm.get(i)){
+                cout << "girlboss!\n" << endl;
+                wrongTerm.remover(i);
+                wrongDef.remover(i);
+            }
+            else{
+            cout << "idiot. the correct answer was " << wrongTerm.get(i) << "\n" << endl;
+                wrongTerm.add(term.get(chooser));
+                wrongDef.add(definition.get(chooser));
+            }
+            wrongSize = wrongDef.getSize();
+            cout << "DEBUG. SIZE IS " << size << " AND WRONGSIZE IS " << wrongSize << endl;
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+        }
+        else if(size%4 == 0){
+            cout << "doing great!"<<endl;
+
+        }
+        
+
+
+
+        cout << "DEBUG. SIZE IS " << size << " AND WRONGSIZE IS " << wrongSize << endl;
+ 
+    }
+    
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+

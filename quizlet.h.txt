@@ -1,0 +1,15 @@
+class arrays{
+    public:
+    arrays(string o1, string o2, string o3);
+
+    arrays();
+    void grow();
+    int getSize() const;
+    void remover(int chooser);
+    string get(int chooser) const;
+    void add(string s);
+
+    private:
+    string* array;
+    int size;
+};

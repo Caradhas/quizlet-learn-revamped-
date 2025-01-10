@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstring>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+#include "arrays.h"
+
+arrays::arrays(string o1, string o2, string o3){
+    array = new string[0];
+    size = 0;
+    grow();
+    grow();
+    grow();
+    array[0] = o1;
+    array[1] = o2;
+    array[2] = o3;
+}
+
+arrays::arrays(){
+    array = new string[0];
+    size = 0;
+}
+string arrays::get(int chooser) const{
+    return array[chooser];
+}
+
+int arrays::getSize() const{
+    return size;
+}
+void arrays::remover(int chooser){
+    for (int i = chooser; i < size - 1; i++) {
+        array[i] = array[i + 1];
+    }
+    size--;
+}
+void arrays::add(string s){
+    grow();
+    array[size-1] = s;
+}
+void arrays::grow(){
+    string * temp = new string[size+1];
+    for(int i = 0; i < size; i++){
+        temp[i] = array[i];
+    }
+    size++;
+    delete [] array;
+    array = temp;
+}
